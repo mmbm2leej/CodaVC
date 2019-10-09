@@ -1,0 +1,1 @@
+draw_sprite_ext(spr_codamainmenu,subimg,160,global.gameHeight,1,1,0,c_white,0.2);

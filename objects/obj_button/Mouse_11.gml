@@ -1,0 +1,1 @@
+if (!audio_is_playing(myleavesound)) audio_play_sound(myleavesound,0,false);

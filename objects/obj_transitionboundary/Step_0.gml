@@ -1,0 +1,1 @@
+image_alpha = obj_debug.debugmode;

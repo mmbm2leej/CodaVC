@@ -1,0 +1,121 @@
+#region Always Runs
+if (!instance_exists(obj_dbox)) {
+	instance_create_layer(0,0,"dialoguelayer",obj_dbox);
+}
+
+if (dialoguestate) { 
+	with (obj_dbox) dboxActive = true;
+} else {
+	with (obj_dbox) dboxActive = false;	
+}
+	
+
+#endregion
+
+#region Intro
+if (room == rm_introCutscene0) {
+	var introMSet = IntroCutscene00_message;
+	var introSSet = IntroCutscene00_speaker;
+	var portSeq = IntroCutscene00_spkrSequence;
+	with (obj_dbox) {
+		messageSet = introMSet;
+		speakerSet = introSSet;
+		portraitSequence = portSeq;
+		portraitleft = spr_dialoguespriteph;
+		portraitright = spr_codadialogue;
+		speakerLeftSound = snd_elder_text;
+		speakerRightSound = snd_coda_text;
+		message_end = 10;
+	}
+	if (playedIntro = false) dialoguestate = true;
+	
+	if (obj_dbox.dialogueComplete) {
+		playedIntro = true;
+		dialoguestate = false;	
+		if (!doOnce) {
+			alarm[0] = 120;
+			doOnce = true;
+		}
+	}
+}
+
+#endregion
+
+#region Whenever the player speaks to an NPC or triggers a cutscene
+
+if (instance_exists(obj_player)) {
+	if (dialoguestate) {
+		/*
+			cs_source = dialoguepartner;		//instance id of colliding npc object
+			cs_dialoguespeaker = partnername;	//string of npc object name
+			cs_dialoguetext = dialoguepartner.mylines;	//array of strings
+		*/
+		#region Tess
+		
+			#region In Act 1 Azaga
+		if (cs_dialoguespeaker == "Tess") {
+			var msgSet = Tess_act1_message;
+			var spkrSet = Tess_act1_speaker;
+			var portSeq = Tess_act1_spkrSequence;
+			var spkrSpr = cs_spkrSprite;
+			with (obj_dbox) {
+				messageSet = msgSet;
+				speakerSet = spkrSet;
+				portraitSequence = portSeq;
+				portraitleft = spkrSpr;
+				portraitright = spr_codadialogue;
+				speakerLeftSound = snd_tess_text;
+				speakerRightSound = snd_coda_text;
+				message_end = array_length_1d(messageSet)-1;
+			}
+	
+			if (obj_dbox.dialogueComplete) {
+				with (cs_source) mystate = NPCSTATES.idle;
+				with (obj_player) mystate = PLAYERSTATE.free;
+				dialoguestate = false;	
+			}
+		}
+		
+		#endregion
+			
+		#endregion
+			
+		#region Cutscene Object
+		
+		if (cs_sourcetype == "Cutscene") {
+			var msgSet = cs_dialoguetext;
+			var spkrSet = cs_source.mydialoguespeakers;
+			var portSeq = cs_portSequence;
+			var spkrSpr = spr_codadialogue;
+			with (obj_dbox) {
+				portraitSequence = portSeq;
+				messageSet = msgSet;
+				speakerSet = spkrSet;
+				portraitleft = spkrSpr;
+				speakerLeftSound = snd_coda_text;
+				message_end = array_length_1d(messageSet)-1;
+			}
+	
+			if (obj_dbox.dialogueComplete) {
+				with (cs_source) watched = true;
+				with (obj_player) mystate = PLAYERSTATE.free;
+				dialoguestate = false;	
+				
+			}
+			
+			
+			
+		
+		}
+		
+		#endregion
+	
+	} 
+	
+	
+}
+
+
+
+#endregion
+

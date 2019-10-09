@@ -1,0 +1,1 @@
+if (!audio_is_playing(myhoversound)) audio_play_sound(myhoversound,0,false);
