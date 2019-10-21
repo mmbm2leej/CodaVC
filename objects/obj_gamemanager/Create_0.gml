@@ -10,6 +10,7 @@ gameovertimer = gameovertimermax;
 
 initloadok = false;
 
+
 #region Game Display variables
 global.gameWidth = 960;
 global.gameHeight = 540;

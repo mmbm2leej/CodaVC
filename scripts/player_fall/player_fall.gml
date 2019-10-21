@@ -1,7 +1,8 @@
 #region Movement while jumping?
 
 var movedir = input_right - input_left;
-hsp = movedir * movespd;
+hsp = movedir * movespd * 0.6;
+
 
 
 
@@ -39,5 +40,3 @@ if (vsp >= 0) {
 	if (sprite_index == spr_codafall) image_index = animation_end(sprite_index,3);
 	
 }
-
-image_xscale = sign(hsp)*-1;

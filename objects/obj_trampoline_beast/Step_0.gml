@@ -4,7 +4,8 @@ if (place_meeting(x,y,obj_player)) {
 	if (boostdelaytimer <= 0) {
 		var boost = boostvalue;
 		with (obj_player) {
-			vsp = boost;
+			//vsp = boost;
+			floatDuration = 300;
 		}
 	}
 

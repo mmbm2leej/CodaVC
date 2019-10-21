@@ -8,7 +8,13 @@ if ((mouse_x > bbox_left) && (mouse_x < bbox_right) && (mouse_y > bbox_top) && (
 
 
 
-if ((mytext == "New Game") && (pressed == true)) room_goto(rm_introCutscene0);
+if ((mytext == "New Game") && (pressed == true)) {
+	with (obj_roomsequence) {
+		targetRoom = rm_introCutscene0;
+		doTransition = true;	
+	}
+	
+}
 
 //if ((mytext == "Settings") && (pressed == true)) room_goto(settings);
 

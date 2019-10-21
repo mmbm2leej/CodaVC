@@ -50,6 +50,14 @@ if (place_meeting(x,y+vsp,obj_boundary)) {
 
 #endregion
 
+#region Floating
+if (floatDuration > 0) {
+	mystate = PLAYERSTATE.floating;	
+}
+
+
+#endregion
+
 #region Taking damage
 
 if (keyboard_check_pressed(ord("O"))) {		//Simulate taking damage
@@ -157,19 +165,27 @@ if (input_interact && (place_meeting(x,y,obj_npc))) {
 }
 
 if (place_meeting(x,y,obj_cutscenehitbox)) {
+	
 	var hb = instance_place(x,y,obj_cutscenehitbox);
 	var portseq = hb.myPortSeq;
-	if (!hb.watched) {
-		with (obj_dialogmgr) {
-			cs_sourcetype = "Cutscene";
-			cs_source = hb;
-			cs_dialoguespeaker = hb.mydialoguespeakers;
-			cs_dialoguetext = hb.mydialoguetext;
-			cs_portSequence = portseq;
-			cs_spkrSprite = noone;
-			dialoguestate = true;
+	if (!hb.chapter0ender) {		//if its not the cutscene object for ending ch0
+		if (	(!hb.watched) && (hb.active)		) {
+			hsp = 0;
+			with (obj_dialogmgr) {
+				cs_sourcetype = "Cutscene";
+				cs_source = hb;
+				cs_dialoguespeaker = hb.mydialoguespeakers;
+				cs_dialoguetext = hb.mydialoguetext;
+				cs_portSequence = portseq;
+				cs_sprleft = hb.sprleft;
+				cs_sprright =	hb.sprright;
+				dialoguestate = true;
+			}
+			mystate = PLAYERSTATE.speaking;
 		}
-		mystate = PLAYERSTATE.speaking;
+	} else {
+		hsp = 0;
+		mystate = PLAYERSTATE.cutscene;
 	}
 	
 }

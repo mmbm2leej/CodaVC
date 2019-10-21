@@ -9,7 +9,6 @@ if ((gamestartspawn) && (!instance_exists(obj_player)) && (room == playareaAzaga
 
 #endregion
 
-
 #region Objects regarding global variable bank
 
 	if (!instance_exists(obj_globalvarbank)) {
@@ -33,6 +32,7 @@ if ((gamestartspawn) && (!instance_exists(obj_player)) && (room == playareaAzaga
 #endregion
 
 if (!initloadok) {
+	if (!instance_exists(obj_blackfade)) instance_create_layer(0,0,"manageroverlayer",obj_blackfade);
 	if (!instance_exists(obj_roomsequence)) instance_create_layer(0,0,"managerlayer",obj_roomsequence);
 	if (!instance_exists(obj_globalvarbank)) instance_create_layer(0,0,"managerlayer",obj_globalvarbank);
 	if (!instance_exists(obj_musicmanager)) instance_create_layer(0,0,"managerlayer",obj_musicmanager);
@@ -42,16 +42,17 @@ if (!initloadok) {
 	if (!instance_exists(obj_glovegui)) instance_create_layer(0,0,"managerlayer",obj_glovegui);
 	if (!instance_exists(obj_combosys)) instance_create_layer(0,0,"managerlayer",obj_combosys);
 	if (!instance_exists(obj_igmenu)) instance_create_layer(0,0,"managerlayer",obj_igmenu);
-	if (!instance_exists(obj_damageIndicator)) instance_create_layer(0,0,"managerlayer",obj_damageIndicator);
-	
+	if (!instance_exists(obj_cutscenemgr)) instance_create_layer(0,0,"managerlayer",obj_cutscenemgr);
+	if (!instance_exists(obj_loadscreen)) instance_create_layer(0,0,"managerlayer",obj_loadscreen);
 	with (obj_roomsequence) initloadok = true;
 	initloadok = true;
 }
 
-if (!instance_exists(obj_camera) && (!cutscene)) {
-	instance_create_layer(0,0,"managerlayer",obj_camera);
+if (room != rm_walkingscene) {
+	if (!instance_exists(obj_camera) && (!cutscene)) {
+		instance_create_layer(0,0,"managerlayer",obj_camera);
+	}
 }
-
 
 	
 #region Toggling the In Game Menu

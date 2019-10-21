@@ -14,7 +14,8 @@
         "e4483b6c-853b-4d7a-9f8c-573d179f2930",
         "eb5fa0ee-ea04-49fb-b844-066a4f744d35",
         "b0828c14-42a9-4833-9757-8a33ff624b14",
-        "c3adc4ca-af3d-425b-a8db-da9f357ee285"
+        "c3adc4ca-af3d-425b-a8db-da9f357ee285",
+        "1c67b1bd-8d7e-4764-ad13-4406ffc350b6"
     ],
     "filterType": "GMSprite",
     "folderName": "Coda Sprites",

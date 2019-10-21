@@ -1,0 +1,1 @@
+mynodetype = NODETYPE.heal;

@@ -1,4 +1,4 @@
-var interactkey = keyboard_check_pressed(ord("E"));
+var interactkey = (keyboard_check_pressed(ord("E"))) || (mouse_check_button_pressed(mb_left));
 
 #region Update Coordinates based on view
 dbox_yInactive = global.gameHeight*(1.5);
@@ -90,7 +90,8 @@ if (dboxReady) {
 		if (speakerSet[message_current] == "Tess") {
 			if (!audio_is_playing(snd_tess_text)) audio_play_sound(snd_tess_text,0,false);			
 		}
-		if (speakerSet[message_current] == "Elder") || (speakerSet[message_current] == "Mom") {
+		if (	(speakerSet[message_current] == "Elder") || (speakerSet[message_current] == "Mom") 
+		|| (speakerSet[message_current] == "Old man")	)	{
 			if (!audio_is_playing(snd_elder_text)) audio_play_sound(snd_elder_text,0,false);
 		}
 		
@@ -108,6 +109,11 @@ if (dboxReady) {
 	        } else { //if our messages are done (we reach 10, in our case)...
 				message_draw = "";
 	            dialogueComplete = true;
+				#region trigger oldman to leave in ch0
+				if (global.ch0endcutscene) {
+					with (obj_oldman) spokench0cave = true;
+				}
+				#endregion
 	        }
 	    }
 	}

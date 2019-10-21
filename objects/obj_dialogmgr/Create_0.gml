@@ -5,7 +5,7 @@
 		#region Intro Cutscene
 		doOnce = false;
 		IntroCutscene00_message = ["(Some hinted lore here in the form of a story told to Coda)",					//0
-									"Alright Coda, you know the deal. Go get those pochumba roots for dinner!", 	//1
+									"Alright Coda, you know the deal. Go get those pochumba roots for\ndinner!", 	//1
 									"... Does that mean?!",															//2
 									"Yup.",																			//3
 									"Yes! Pochumbo tonight!",														//4
@@ -13,7 +13,7 @@
 									"Alright, alright! I'm going.",													//6
 									"... Oh! And Coda... ",															//7
 									"Yeah?",																		//8
-									"DON'T go anywhere near that crazy old man near the cave out EAST. Got it?",	//9
+									"DON'T go anywhere near that crazy old man near the cave out EAST.\nGot it?",	//9
 									"I remember, mom. Geez."];														//10
 		
 		
@@ -21,8 +21,8 @@
 								//	0		1		2		3		4		5		6		7		8		9		10
 		IntroCutscene00_spkrSequence = [2,	2,		1,		2,		1,		2,		1,		2,		1,		2,		1];
 		#endregion
-	
-	#endregion
+
+		#endregion
 
 	#region All NPC Lines
 
@@ -52,6 +52,7 @@
 
 #endregion
 
+beginIntro = false;
 playedIntro = false;
 dialoguestate = false;
 
@@ -60,7 +61,8 @@ cs_source = noone;			//instance id of colliding npc object
 cs_dialoguespeaker = noone;	//string of npc object name
 cs_dialoguetext = noone;	//array of strings
 cs_portSequence = noone;
-cs_spkrSprite = noone;
+cs_sprleft = noone;
+cs_sprright = noone;
 
 
 

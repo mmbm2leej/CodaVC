@@ -41,7 +41,8 @@ enum NODETYPE {
 
 enum NPCSTATES {
 	idle = 0,
-	speaking = 1
+	speaking = 1,
+	cutscene = 2
 }
 
 /*
@@ -51,10 +52,12 @@ enum NPCSTATES {
 [1		Waelen		spr_waelen_idle		spr_waelen_walk												]	
 [2		Vashya		spr_vashya_idle		spr_vashya_walk												]		
 [3		Elder		spr_villageldr_idle	spr_villageldr_walk											]
+[4		Scumbag		spr_scumbag_idle	spr_scumbag_walk	spr_scumbag_run		spr_scumbagdialogue	]
+[5		Old Man		spr_oldman_idle		spr_oldman_walk		spr_oldman_run		spr_oldmandialogue	]
 */
 
 //Create the NPC database
-global.ds_NPCDB = ds_grid_create(5,5);
+global.ds_NPCDB = ds_grid_create(5,6);
 
 #endregion
 
@@ -72,26 +75,36 @@ ds_grid_set(global.ds_NPCDB,0,1,"Waelen");
 ds_grid_set(global.ds_NPCDB,1,1,spr_waelen_idle);
 ds_grid_set(global.ds_NPCDB,2,1,spr_waelen_walk);
 ds_grid_set(global.ds_NPCDB,3,1,-1);		//update this when we get sprites for chasing/running
+ds_grid_set(global.ds_NPCDB,4,0,spr_dialoguespriteph);
+
 
 //Vashya
 ds_grid_set(global.ds_NPCDB,0,2,"Vashya");
 ds_grid_set(global.ds_NPCDB,1,2,spr_vashya_idle);
 ds_grid_set(global.ds_NPCDB,2,2,spr_vashya_walk);
 ds_grid_set(global.ds_NPCDB,3,2,-1);		//update this when we get sprites for chasing/running
+ds_grid_set(global.ds_NPCDB,4,0,spr_dialoguespriteph);
 
 //Elder
 ds_grid_set(global.ds_NPCDB,0,3,"Elder");
 ds_grid_set(global.ds_NPCDB,1,3,spr_villageldr_idle);
 ds_grid_set(global.ds_NPCDB,2,3,spr_villageldr_walk);
 ds_grid_set(global.ds_NPCDB,3,3,-1);		//update this when we get sprites for chasing/running
+ds_grid_set(global.ds_NPCDB,4,0,spr_dialoguespriteph);
 
 //LootboxNPC
 ds_grid_set(global.ds_NPCDB,0,4,"Scumbag");
 ds_grid_set(global.ds_NPCDB,1,4,spr_scumbag);
 ds_grid_set(global.ds_NPCDB,2,4,spr_scumbag);
 ds_grid_set(global.ds_NPCDB,3,4,-1);		//update this when we get sprites for chasing/running
+ds_grid_set(global.ds_NPCDB,4,4,spr_scumbag);
 
-
+//Old Man
+ds_grid_set(global.ds_NPCDB,0,5,"Old Man");
+ds_grid_set(global.ds_NPCDB,1,5,spr_oldman_idle);
+ds_grid_set(global.ds_NPCDB,2,5,spr_oldman_walk);
+ds_grid_set(global.ds_NPCDB,3,5,spr_oldman_run);		//update this when we get sprites for chasing/running
+ds_grid_set(global.ds_NPCDB,4,5,spr_dialoguespriteph);
 
 #endregion
 
@@ -160,17 +173,31 @@ global.playerInventory = ds_grid_create(global.InvWidth, 1);
 
 #endregion
 
-#region Cutscene DB
+#region Cutscene Markers
+	global.postCasPart1Watched = false;
 
-#region Cave Entrance Cutscenes
+	#region Cave Entrance Cutscenes
 
-caveentrance_cutsceneplayed = 
-[false,		//When character enters the cave for the first time
-false,		//Remarks fruit is scarce
-false,		//Notice Miniboss in room
-false,		//After defeating Miniboss
-false,		//Finding the fruit
-false];		//Right before exiting the cave
+		#region Chapter 0
+
+		//false = havent played before, true = already played
+	
+		//size 5
+		global.caveentrance_cutsceneplayed = 
+		[false,		//When character enters the cave for the first time
+		false,		//Remarks fruit is scarce
+		false,		//Notice Miniboss in room
+		false,		//After defeating Miniboss
+		false];		//Finding the fruit
+
+		global.ch0endcutscene = false;
+		global.ch0endcutscenetimer = 0;
+
+		#endregion
+
+
+
+
 
 
 

@@ -4,5 +4,9 @@ mydialoguetext = ["This place...",
 				"It feels...",
 				"So different from how it always was."];
 myPortSeq = [2,2,2,2];
+myflag = 4;
+sprleft = spr_codadialogue;
+sprright = spr_dialoguespriteph;
+active = true;
 //fourth cave cutscene
 

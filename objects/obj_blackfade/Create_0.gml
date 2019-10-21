@@ -1,4 +1,4 @@
-blackalpha = 0;
+blackalpha = 1;
 transtart = false;
 tranend = false;
 stayblacktimermax = 120;

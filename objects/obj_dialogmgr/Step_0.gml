@@ -14,27 +14,30 @@ if (dialoguestate) {
 
 #region Intro
 if (room == rm_introCutscene0) {
-	var introMSet = IntroCutscene00_message;
-	var introSSet = IntroCutscene00_speaker;
-	var portSeq = IntroCutscene00_spkrSequence;
-	with (obj_dbox) {
-		messageSet = introMSet;
-		speakerSet = introSSet;
-		portraitSequence = portSeq;
-		portraitleft = spr_dialoguespriteph;
-		portraitright = spr_codadialogue;
-		speakerLeftSound = snd_elder_text;
-		speakerRightSound = snd_coda_text;
-		message_end = 10;
-	}
-	if (playedIntro = false) dialoguestate = true;
 	
-	if (obj_dbox.dialogueComplete) {
-		playedIntro = true;
-		dialoguestate = false;	
-		if (!doOnce) {
-			alarm[0] = 120;
-			doOnce = true;
+	if (beginIntro) {
+		var introMSet = IntroCutscene00_message;
+		var introSSet = IntroCutscene00_speaker;
+		var portSeq = IntroCutscene00_spkrSequence;
+		with (obj_dbox) {
+			messageSet = introMSet;
+			speakerSet = introSSet;
+			portraitSequence = portSeq;
+			portraitleft = spr_dialoguespriteph;
+			portraitright = spr_codadialogue;
+			speakerLeftSound = snd_elder_text;
+			speakerRightSound = snd_coda_text;
+			message_end = 10;
+		}
+		if (playedIntro = false) dialoguestate = true;
+	
+		if (obj_dbox.dialogueComplete) {
+			playedIntro = true;
+			dialoguestate = false;	
+			if (!doOnce) {
+				alarm[0] = 120;
+				doOnce = true;
+			}
 		}
 	}
 }
@@ -86,13 +89,14 @@ if (instance_exists(obj_player)) {
 			var msgSet = cs_dialoguetext;
 			var spkrSet = cs_source.mydialoguespeakers;
 			var portSeq = cs_portSequence;
-			var spkrSpr = spr_codadialogue;
+			var spkrSprLeft = cs_sprleft;
+			var spkrSprRight = cs_sprright;
 			with (obj_dbox) {
 				portraitSequence = portSeq;
 				messageSet = msgSet;
 				speakerSet = spkrSet;
-				portraitleft = spkrSpr;
-				speakerLeftSound = snd_coda_text;
+				portraitleft = spkrSprLeft;
+				portraitright = spkrSprRight;
 				message_end = array_length_1d(messageSet)-1;
 			}
 	

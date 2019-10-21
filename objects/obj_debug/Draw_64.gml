@@ -19,7 +19,8 @@ if (debugmode) {
 			case 6:	draw_text(192,	linesep * 2,	"jumprise"); break;
 			case 7:	draw_text(192,	linesep * 2,	"speaking"); break;
 			case 8:	draw_text(192,	linesep * 2,	"fall"); break;
-			case 9:	draw_text(192,	linesep * 2,	"tookdmg"); 
+			case 9:	draw_text(192,	linesep * 2,	"tookdmg"); break;
+			case 10: draw_text(192,	linesep * 2,	"cutscene"); 
 		}
 		
 	
@@ -55,6 +56,7 @@ if (debugmode) {
 		
 		draw_text(32,	linesep * 13,	"dialoguemgr.playerpartner:");
 		draw_text(280,	linesep * 13,	obj_dialogmgr.cs_source);
+
 	
 	}
 	

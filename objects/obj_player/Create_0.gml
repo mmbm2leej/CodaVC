@@ -11,6 +11,7 @@ currentface = 1;
 idletimermax = 18000;
 idletimer = idletimermax;
 horizontalfriction = 0.03;
+floatDuration = 0;
 
 enum PLAYERSTATE {
 	free = 0,
@@ -23,6 +24,8 @@ enum PLAYERSTATE {
 	speaking = 7,
 	fall = 8,
 	tookdmg = 9,
+	cutscene = 10,
+	floating = 11
 }
 
 didshoot = false;
@@ -56,6 +59,22 @@ currentattack = 0;
 currentattackrefreshtimermax = 90;
 currentattackrefreshtimer = currentattackrefreshtimermax;
 hitbyAttack = ds_list_create();
+
+#endregion
+
+#region Cutscene Flags
+// happened is true, didnt happen yet is false
+chapter0end = false;
+
+	#region in ch0
+	
+	ch0_codasurprised = false;
+
+
+
+	#endregion
+
+
 
 #endregion
 

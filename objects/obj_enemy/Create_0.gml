@@ -45,7 +45,7 @@ deathsoundplayed = false;
 
 mydetectionrange = 150;
 mycombatrange = 20;
-mydisengagerange = 250;
+mydisengagerange = 350;
 mycombatdisengage = 70;
 alerttimermax = 90;
 alerttimer = alerttimermax;

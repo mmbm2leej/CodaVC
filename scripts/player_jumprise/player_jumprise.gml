@@ -5,6 +5,19 @@ hsp = movedir * movespd;
 
 #endregion
 
+#region Attacking while rising
+
+//this doesnt work yet
+if (input_melee) {
+
+	player_risemelee();
+	
+}
+
+
+
+
+#endregion
 
 /*
 if (place_meeting(x+hsp,y,obj_wallboundary)) {
@@ -35,7 +48,6 @@ if (!place_meeting(x,y+1,obj_boundary)) {
 
 }
 
-image_xscale = sign(hsp)*-1;
 
 if (vsp > 0) mystate = PLAYERSTATE.fall;
 

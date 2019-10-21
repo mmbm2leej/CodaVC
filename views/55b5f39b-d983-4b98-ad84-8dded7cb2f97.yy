@@ -17,7 +17,8 @@
         "7ea2b669-d422-4c23-a1b5-05df1675829d",
         "051c4a6c-8c0b-4078-8c67-0f9a9db25a55",
         "88ae0c35-1a5c-4d28-bc95-fca8d7dd6157",
-        "a591df12-91ad-4023-8676-e36e98f3397b"
+        "a591df12-91ad-4023-8676-e36e98f3397b",
+        "c2b4767b-bfa6-47ce-87eb-5c07064330cf"
     ],
     "filterType": "GMObject",
     "folderName": "Manager objects",

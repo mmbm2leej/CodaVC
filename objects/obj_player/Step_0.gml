@@ -19,20 +19,23 @@ if	(		((!input_left) && (hsp < 0))		 ||			((!input_right) && (hsp > 0))		) {
 
 #endregion
 
+
 #region State system
 
 	switch mystate {
-		
+		case PLAYERSTATE.floating: player_float(); break;
 		case PLAYERSTATE.tookdmg: player_tookdmg(); break;
 		case PLAYERSTATE.melee: playermeleeatk(); break;
 		case PLAYERSTATE.meleecombo: playermeleecombo(); break;
-		case PLAYERSTATE.ranged: playerrangedatk(); break;
+		case PLAYERSTATE.ranged: player_godattack(); break;
 		case PLAYERSTATE.longidle: player_longidle(); break;
 		case PLAYERSTATE.death: player_gameover(); break;
 		case PLAYERSTATE.jumprise: player_jumprise(); break;
 		case PLAYERSTATE.fall: player_fall(); break;
 		case PLAYERSTATE.speaking: player_speak(); break;
 		case PLAYERSTATE.free: playerfree();
+		//theres a cutscene state existing, but for now 
+		//isnt in the switch 
 	}
 
 
@@ -46,9 +49,6 @@ if (invincible) {
 } else {
 	redflashalpha = approach(redflashalpha,0,0.01);
 }
-
-
-
 
 #endregion
 
@@ -91,6 +91,7 @@ if (place_meeting(x,y,obj_boundary)) {
 
 #endregion
 
+if (hsp != 0) image_xscale = sign(hsp);
 x += hsp * movespd;
 y += vsp;
 
@@ -210,5 +211,96 @@ if (input_interact) {
 }
 
 
+
+#endregion
+
+#region If in a cutscene
+
+if (mystate == PLAYERSTATE.cutscene) {
+	if (hsp != 0) hsp = approach(hsp,0,0.5);
+	#region If the room is the cave entrance
+	if (room == rm_caveentrance) {
+			
+			if (global.ch0endcutscene) {
+				sprite_index = spr_codaidle;
+				
+				if (obj_cutscenemgr.createdoldman) {
+					if (!ch0_codasurprised) {
+					//act surprised
+					vsp = -2;
+					hsp = 2;
+					instance_create_layer(id.x,id.y-150,"guilayer",obj_alertnotice);
+					audio_play_sound(snd_alert4,-10,false);
+					ch0_codasurprised = true;
+					}
+				} 
+				
+			} //mystate = PLAYERSTATE.free;
+		
+	}
+	
+	
+	#endregion
+	
+	#region If room is post cadenza east
+	if (room == rm_postCasCadEast0) {
+			
+		if (!(global.postCasPart1Watched)) {
+				
+			#region Run to the edge
+			if (obj_cutscenemgr.playerRunToEdge) {
+				if (id.x > 3984) {
+					hsp = -3;
+					sprite_index = spr_codarun;
+					image_xscale = -1;
+				} else {
+					id.x = 3984;
+					hsp = 0;
+					//make the sprite of coda about to lose balance
+					sprite_index = spr_codaidle; //FOR NOW
+					with (obj_cutscenemgr) {
+						playeratEdge = true;	
+						playerRunToEdge = false;	
+					}
+				}
+			} 
+			#endregion
+			
+			#region Back off the edge
+			if (obj_cutscenemgr.backOffEdge) {
+				if (x < 4050) {
+					hsp = 1.5;
+					sprite_index = spr_codawalk;
+					image_xscale = 1;
+				} else {
+					hsp = 0;
+					sprite_index = spr_codaidle;
+					with (obj_cutscenemgr) playerbackOffEdgeComplete = true;
+				}
+				
+				if (obj_cutscenemgr.playerLookOutEdge) {
+					image_xscale = -1;	
+				}
+	
+			}
+			#endregion
+
+		} //mystate = PLAYERSTATE.free;
+	
+	
+	}
+	
+	#endregion
+	
+	#region Walking scene
+	if (room == rm_walkingscene) {
+		sprite_index = spr_codawalk;	
+		image_xscale = -1;
+		image_speed = 1;
+	}
+	
+	#endregion
+	
+}
 
 #endregion

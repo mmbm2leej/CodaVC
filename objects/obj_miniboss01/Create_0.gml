@@ -7,6 +7,8 @@ active = false;
 dead = false;
 invincible = false;
 alpha = 1;
+myxpworth = 60;
+
 
 
 //Loot on death
@@ -17,12 +19,24 @@ shield powerup
 
 enum miniBossState {
 	normal = 0,	
-	special0 = 1,
-	special1 = 2,
-	special2 = 3
+	triOrb = 1,
+	claw = 2,
+	earthShake = 3,
+	shardFall = 4,
+	takedmg = 5,
+	death = 6
 }
 
 mystate = miniBossState.normal;
 
+
+#endregion
+
+#region State variables
+
+fireballsOnce = false;
+rolledStateRandom = false;
+startNormalAlarm = false;
+normalEnd = false;
 
 #endregion
